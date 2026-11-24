@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta El Niño - Sistema Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex flex-col items-center p-6">
+
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-sky-400">Sistema de Monitoreo: Fenómeno El Niño</h1>
+        <p class="text-slate-400 mt-2">Interacción en tiempo real mediante cámara web</p>
+    </header>
+
+    <main class="w-full max-w-2xl bg-slate-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <!-- Contenedor de la Webcam (Requisito Obligatorio) -->
+        <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden border-2 border-sky-500">
+            <video id="webcam" autoplay playsinline class="w-full h-full object-cover"></video>
+        </div>
+
+        <!-- Botones de interacción -->
+        <div class="flex gap-4 mt-6">
+            <button id="btnIniciar" class="bg-sky-600 hover:bg-sky-500 px-5 py-2 rounded-lg font-semibold transition">
+                Activar Cámara
+            </button>
+            <button id="btnAnalizar" class="bg-emerald-600 hover:bg-emerald-500 px-5 py-2 rounded-lg font-semibold transition">
+                Enviar Reporte al Servidor
+            </button>
+        </div>
+
+        <!-- Caja de respuesta del Backend -->
+        <div id="resultado" class="mt-6 w-full p-4 bg-slate-700 rounded-lg text-center text-sm text-sky-200 hidden">
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
