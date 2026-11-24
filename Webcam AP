@@ -1,0 +1,36 @@
+const video = document.getElementById('webcam');
+const btnIniciar = document.getElementById('btnIniciar');
+const btnAnalizar = document.getElementById('btnAnalizar');
+const cajaResultado = document.getElementById('resultado');
+
+// 1. Activar la cámara web
+btnIniciar.addEventListener('click', async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+    } catch (error) {
+        alert("No se pudo acceder a la cámara: " + error.message);
+    }
+});
+
+// 2. Enviar datos al Backend en Python (FastAPI)
+btnAnalizar.addEventListener('click', async () => {
+    cajaResultado.classList.remove('hidden');
+    cajaResultado.textContent = "Procesando con el servidor...";
+
+    try {
+        const response = await fetch('http://127.0.0.1:8000/analizar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                estado: "Alerta detectada por cámara",
+                detalles: "Captura enviada desde la interfaz web"
+            })
+        });
+
+        const data = await response.json();
+        cajaResultado.textContent = data.resultado;
+    } catch (error) {
+        cajaResultado.textContent = "Error al conectar con el backend en Python.";
+    }
+});
