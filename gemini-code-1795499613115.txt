@@ -1,0 +1,6 @@
+proyecto-fenomeno-nino/
+├── backend/
+│   └── main.py
+└── frontend/
+    ├── index.html
+    └── app.js
